@@ -93,7 +93,7 @@ registerStudent.verifyCode = async(req, res) => {
         
         const {verificationCodeRequest} = req.body
 
-        const token = req.cookie.verificationToken;
+        const tokenCode = req.cookie.verificationToken;
 
         const decoded = jsonwebtoken.verify(tokenCode, config.JWT.secret);
 

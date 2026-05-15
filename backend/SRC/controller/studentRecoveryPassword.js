@@ -24,14 +24,14 @@ studentRecoveryPassword.requestCode = async(req, res) => {
         } 
         const code = crypto.randomBytes(3).toString("hex");
         
-        const token = jsonwebtoken.sign(
+        const tokenCode = jsonwebtoken.sign(
             {email, randomCode, UserType: "customer", verified: false},
             config.JWT.secret,
             {expiresIn: "15m"},
 
         )
 
-        res.cookie("recoveryCookie", token, {maxAge: 15 * 60 * 1000})
+        res.cookie("recoveryCookie", tokenCode, {maxAge: 15 * 60 * 1000})
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -67,8 +67,8 @@ studentRecoveryPassword.verifyCode = async(res, req) => {
 try {
          const { code } = req.body;
 
-         const token = req.cookies.recoveryCookie
-         const decoded = jsonwebtoken.verify(token, config.JWT.secret)
+         const tokenCode = req.cookies.recoveryCookie
+         const decoded = jsonwebtoken.verify(tokenCode, config.JWT.secret)
 
          if(code !== decoded.randomCode){
             return res.status(400).json({message: "invalid code"})
@@ -101,8 +101,8 @@ studentRecoveryPassword.newPassword = async (req, res) => {
             return res.status(400).json({message: "las contraseñas no coinciden"})
         }
 
-        const token = req.cookie.recoveryCookie;
-        const decoded = jsonwebtoken.verify(token, config.JWT.secret);
+        const tokenCode = req.cookie.recoveryCookie;
+        const decoded = jsonwebtoken.verify(tokenCode, config.JWT.secret);
 
         if (!decoded.verified) {
             return res.status(400).json({message: "Codigo no verificado"})
@@ -121,7 +121,7 @@ studentRecoveryPassword.newPassword = async (req, res) => {
         return res.status(200).json({message: "Contraseña Actualizada"})
 
     } catch (error) {
-         console.log("error" + error)
+        console.log("error" + error)
         return res.status(500).json({message: "Internal server error"});
     }
 }

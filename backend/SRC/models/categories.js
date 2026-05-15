@@ -20,7 +20,6 @@ const categoriesSchema = new Schema(
         },
         isActive: {
             type: Boolean,
-            default: true
         }
     },
     {

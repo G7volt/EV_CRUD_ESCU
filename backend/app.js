@@ -15,6 +15,8 @@ import studentRecoveryPassword from "./SRC/routes/recoveryStudents.js";
 
 //--CRUDS Materias, categorias y tareas
 import homework from "./SRC/routes/homework.js";
+import logOut from "./SRC/routes/logOut.js"
+import categories from "./SRC/routes/categories.js";
 
 const app = express();
 
@@ -39,5 +41,7 @@ app.use("/api/studentRecoveryPassword", studentRecoveryPassword);
 
 //-----Rutas para los otros cruds
 app.use("/api/homework", homework)
+app.use("/api/logOut", logOut)
+app.use("/api/categories", categories)
 
 export default app;

@@ -49,3 +49,5 @@ studentLoginController.login = async(req, res) => {
         return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
+
+export default studentLoginController;

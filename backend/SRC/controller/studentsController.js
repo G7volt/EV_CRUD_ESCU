@@ -54,7 +54,7 @@ studentsController.updateStudents = async(req, res) => {
     }
 }
 
-studentaController.deleteStudents = async(req, res) => {
+studentsController.deleteStudents = async(req, res) => {
     try {
         await studentsModel.findByIdAndDelete(req.params.id);
         return res.status(200).json({message: "Estudiante eliminado"});
@@ -64,3 +64,5 @@ studentaController.deleteStudents = async(req, res) => {
         return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
+
+export default studentsController;

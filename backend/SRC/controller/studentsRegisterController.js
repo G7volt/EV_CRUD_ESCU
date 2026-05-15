@@ -54,7 +54,7 @@ registerStudent.register = async(req, res) => {
             {expiresIn: "10m"}
         );
 
-        res.cokie("verificationToken", tokenCode,{
+        res.cookie("verificationToken", tokenCode,{
             maxAge: 15*60*1000
         })
 
@@ -73,14 +73,14 @@ registerStudent.register = async(req, res) => {
             text: "Para verificar tu cuenta, utiliza este codigo: " + verificationCode + " Expira en 10 minutos"
         }
 
-        transporter.sendMail(mailOptions,(error,info)) = {
+        transporter.sendMail(mailOptions,(error,info) => {
             if(error){
                 console.log("error" + error);
                 return res.status(500).json({message: "Hubo un error"})
-            },
-        }
+            }
+        })
 
-        res.status(200).json({message: "Esudiante Registrado, verifica tu email"});
+        return res.status(200).json({message: "Esudiante Registrado, verifica tu email"});
 
     } catch (error) {
         console.log("error" + error)
@@ -95,7 +95,7 @@ registerStudent.verifyCode = async(req, res) => {
 
         const token = req.cookie.verificationToken;
 
-        const decoded = jsonwebtoken.verify(token, config.JWT.secret);
+        const decoded = jsonwebtoken.verify(tokenCode, config.JWT.secret);
 
         let{
             name,

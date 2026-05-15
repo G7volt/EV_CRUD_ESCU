@@ -7,4 +7,4 @@ async function main(){
     console.log("Server on port 4000");
 }
 
-main;
+main();

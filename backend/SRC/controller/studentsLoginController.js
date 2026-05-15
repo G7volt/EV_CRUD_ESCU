@@ -36,7 +36,14 @@ studentLoginController.login = async(req, res) => {
         userFound.timeOut = null;
         await userFound.save();
 
-        const token = jsonwebtoken.sign
+        const token = jsonwebtoken.sign(
+            {id: userFound._id, userType: "student"},
+            config.JWT.secret,
+            {expiresIn: "30d"},
+        );
+
+        res.cookie("authCookie", token);
+        return res.status(200).json({message: "Login Exitoso"})
     } catch (error) {
         console.log("error" + error)
         return res.status(500).json({message: "Internal Server Error " + error})

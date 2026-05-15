@@ -7,7 +7,7 @@ homeworkController.getHomework = async(req, res) => {
         const homework = await homeworkModel.find();
         res.json(homework);
    } catch (error) {
-
+        console.log(error)
         res.status(500).json({message: "Internal Server Error " + error})
    }
 }
@@ -33,7 +33,7 @@ homeworkController.insertHomework = async(req, res) => {
     await newHomework.save();
     res.json({message: "Tarea guardada"})
     } catch (error) {
-
+        console.log(error)
         res.status(500).json({message: "Internal Server Error " + error})
     }
 }
@@ -61,7 +61,7 @@ try {
 
     res.json({message: "Tarea Actualizada"});
 } catch (error) {
-
+    console.log(error)
     res.status(500).json({message: "Internal Server Error " + error})
 }
 };
@@ -72,7 +72,7 @@ homeworkController.deleteHomework = async(req, res) => {
         res.json({message: "Tarea eliminada"});
 
     } catch (error) {
-
+        console.log(error)
         res.status(500).json({message: "Internal Server Error " + error})
     }
 }

@@ -39,7 +39,6 @@ const studentsSchema = new Schema(
         },
         isActive: {
             type: Boolean,
-            default: true
         },
         isVerified: {
             type: Boolean

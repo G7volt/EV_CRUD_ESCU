@@ -1,6 +1,6 @@
 import express, { Router } from "express"; 
 
-import homeworkController from "../controller/homeworkController";
+import homeworkController from "../controller/homeworkController.js";
 
 const router = express.Router();
 

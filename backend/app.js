@@ -1,18 +1,20 @@
-import e from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
 //--ESTUDIANTES
 import students from "./SRC/routes/students.js"
-import studentsLogin from "./SRC/router/loginStudents.js"
-import studentsRegister from "./SRC/controller/studentsRegisterController.js"
-import studentRecoveryPassword from "./SRC/controller/studentRecoveryPassword.js";
+import studentsLogin from "./SRC/routes/loginStudents.js"
+import studentsRegister from "./SRC/routes/registerStudents.js"
+import studentRecoveryPassword from "./SRC/routes/recoveryStudents.js";
+
 
 //-- Profesores
 
 
 
 //--CRUDS Materias, categorias y tareas
+import homework from "./SRC/routes/homework.js";
 
 const app = express();
 
@@ -25,7 +27,17 @@ app.use(cookieParser());
 
 app.use(express.json());
 
+//-----Rutas para Estudiantes
 app.use("/api/students", students);
 app.use("/api/studentsLogin", studentsLogin);
-app.use("/api/studentsRegister", studentsRegister)
-app.use("/api/studentRecoveryPassword", studentRecoveryPassword)
+app.use("/api/studentsRegister", studentsRegister);
+app.use("/api/studentRecoveryPassword", studentRecoveryPassword);
+
+//-----Rutas para Profesores
+
+
+
+//-----Rutas para los otros cruds
+app.use("/api/homework", homework)
+
+export default app;

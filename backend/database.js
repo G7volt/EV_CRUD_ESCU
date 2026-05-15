@@ -1,7 +1,7 @@
 import mongoose, { connect } from "mongoose"; 
 import { config } from "./SRC/config.js";
 
-mongoose.connect(config.db.DB_URI)
+mongoose.connect("mongodb://localhost:27017/EV_CRUD_ESCU")
 
 const connection = mongoose.connection; 
 

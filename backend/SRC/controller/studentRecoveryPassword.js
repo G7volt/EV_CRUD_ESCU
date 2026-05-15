@@ -8,7 +8,6 @@ import {config} from "../config.js";
 import studentModel from "../models/students.js"
 
 import { error, info } from "console";
-import {decode} from "punycode";
 import {json} from "express"
 
 const studentRecoveryPassword = {};

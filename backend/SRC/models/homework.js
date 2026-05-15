@@ -31,4 +31,4 @@ const homeworkSchema = new Schema (
     }
 );
 
-export default homeworkModel ("Homework", homeworkSchema);
+export default model ("Homework", homeworkSchema);

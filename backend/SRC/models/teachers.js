@@ -52,4 +52,4 @@ const teacherSchema = new Schema (
     }
 );
 
-export default teacherModel("Teachers", teacherSchema);
+export default model("Teachers", teacherSchema);

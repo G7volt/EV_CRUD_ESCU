@@ -5,10 +5,10 @@ const studentsController = {};
 studentsController.getStudents = async(req, res) => {
     try {
         const students = await studentsModel.find();
-        res.json(students);
+        return res.status(200).json(students);
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message: "Internal Server Error " + error})
+        console.log("error" + error)
+        return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
 
@@ -28,11 +28,28 @@ studentsController.updateStudents = async(req, res) => {
             timeOut
         }= req.body
 
-        password = password.trim();
-        email = email.trim();
+        const updateStudent = await studentsModel.findByIdAndUpdate(
+            req.params.id,{
+                name,
+                lastName,
+                email,
+                password,
+                birthdate,
+                phone,
+                grade, 
+                isActive,
+                isVerified, 
+                loginAttempts,
+                timeOut
+            }
+        )
+
+        if (!updateStudent) {
+        return res.status(404).json({message: "Tarea no encontrada"});
+    }
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: "Internal Server Error " + error})
+        return res.status(500).json({message: "Internal Server Error " + error})
     }
 }

@@ -29,4 +29,4 @@ const categoriesSchema = new Schema(
     }
 )
 
-export default categoriesModel ("Categories", categoriesSchema);
+export default model ("Categories", categoriesSchema);

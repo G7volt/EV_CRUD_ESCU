@@ -22,4 +22,4 @@ const subjectSchema = new Schema (
     }
 )
 
-export default subjectModel ("Subject", subjectSchema);
+export default model ("Subject", subjectSchema);

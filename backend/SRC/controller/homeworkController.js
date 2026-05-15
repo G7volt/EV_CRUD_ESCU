@@ -5,10 +5,10 @@ const homeworkController = {};
 homeworkController.getHomework = async(req, res) => {
    try {
         const homework = await homeworkModel.find();
-        res.json(homework);
+        return res.status(200).json(homework);
    } catch (error) {
         console.log(error)
-        res.status(500).json({message: "Internal Server Error " + error})
+        return res.status(500).json({message: "Internal Server Error " + error})
    }
 }
 
@@ -31,10 +31,10 @@ homeworkController.insertHomework = async(req, res) => {
     });
 
     await newHomework.save();
-    res.json({message: "Tarea guardada"})
+    return res.status(200).json({message: "Tarea Agregada"});
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: "Internal Server Error " + error})
+        return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
 
@@ -57,23 +57,27 @@ try {
             priority,
             status
         }, {new: true},
-    )
+    );
 
-    res.json({message: "Tarea Actualizada"});
+    if (!updateHomework) {
+        return res.status(404).json({message: "Tarea no encontrada"})
+    }
+
+    return res.status(200).json({message: "Tarea Actualizada"});
 } catch (error) {
     console.log(error)
-    res.status(500).json({message: "Internal Server Error " + error})
+    return res.status(500).json({message: "Internal Server Error " + error})
 }
 };
 
 homeworkController.deleteHomework = async(req, res) => {
     try {
         await homeworkModel.findByIdAndDelete(req.params.id);
-        res.json({message: "Tarea eliminada"});
+        return res.status(200).json({message: "Tarea eliminada"});
 
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message: "Internal Server Error " + error})
+        console.log("error" + error)
+        return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
 

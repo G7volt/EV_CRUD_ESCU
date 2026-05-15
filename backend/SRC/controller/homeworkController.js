@@ -33,7 +33,7 @@ homeworkController.insertHomework = async(req, res) => {
     await newHomework.save();
     return res.status(200).json({message: "Tarea Agregada"});
     } catch (error) {
-        console.log(error)
+        console.log("error" + error)
         return res.status(500).json({message: "Internal Server Error " + error})
     }
 }
